@@ -1,2 +1,4 @@
-# insta-clone
-A clone of Instagram application
+## About Laravel
+
+I replicating the clone of Instagram here
+
