@@ -18,10 +18,10 @@
                 <div class="pr-4"><strong>1040 </strong>followers</div>
                 <div class="pr-4"><strong>62 </strong>following</div>
             </div>
-            <div><strong>Sheril Jose</strong></div>
-            <div>Don't underestimate the power of righteous anger</div>
+            <div><strong>{{ $user->profile->title }}</strong></div>
+        <div>{{ $user->profile->description }}</div>
             <div>
-                <a href="#" class="nounderline dark-color"><strong>www.selfhealing.com</strong></a>
+            <a href="#" class="nounderline dark-color"><strong>{{ $user->profile->url }}</strong></a>
             </div>
         </div>
     </div>
