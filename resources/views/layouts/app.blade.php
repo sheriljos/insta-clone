@@ -28,7 +28,7 @@
                         <img src="/images/icon.svg" alt="icon" width=30>
                     </div>
                     <div class="pl-2 border-left border-dark">
-                        <p class="font-weight-bold mb-0 logo">InstaClone</p>
+                        <p class="font-weight-bold mb-0 cursive">InstaClone</p>
                     </div>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">

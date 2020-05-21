@@ -19,6 +19,8 @@ class ProfilesController extends Controller
             dd('no user dude');
         }
 
-        return view('home', ['user' => $user]);
+        return view('profiles.index', 
+            ['user' => $user]
+        );
     }
 }

@@ -10,8 +10,9 @@
                 class="rounded-circle">
         </div>
         <div class="col-9">
-            <div>
+            <div class="d-flex justify-content-between align-items-baseline">
                 <h3>{{ $user->username }}</h3>
+            <a href="{{ route('post.create')}}">Add posts</a>
             </div>
             <div class="d-flex pt-2 pb-3">
                 <div class="pr-4"><strong>34 </strong>posts</div>
