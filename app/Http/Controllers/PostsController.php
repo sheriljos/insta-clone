@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Post;
 use Illuminate\Http\Request;
 use App\Http\Requests\PostRequest;
+use Intervention\Image\Facades\Image;
 
 class PostsController extends Controller
 {
@@ -20,10 +21,16 @@ class PostsController extends Controller
 
     public function store(PostRequest $postRequest)
     {
-        $post = $postRequest->except('_token');
-        auth()->user()->posts()->create($post);
+        $imagePath = $postRequest->image->store('uploads', 'public');
+        
+        $image = Image::make(public_path("storage/{$imagePath}"))->fit(300, 300);
+        $image->save();
 
-        //TODO: redirect to profile
-        return "POST CREATED";
+        auth()->user()->posts()->create([
+            'caption' => $postRequest->caption,
+            'image'   => $imagePath
+        ]);
+
+        return redirect('/profile/'. auth()->user()->username);
     }
 }

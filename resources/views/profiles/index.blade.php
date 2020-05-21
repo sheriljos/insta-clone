@@ -15,7 +15,7 @@
             <a href="{{ route('post.create')}}">Add posts</a>
             </div>
             <div class="d-flex pt-2 pb-3">
-                <div class="pr-4"><strong>34 </strong>posts</div>
+                <div class="pr-4"><strong>{{ $user->posts->count() }} </strong>posts</div>
                 <div class="pr-4"><strong>1040 </strong>followers</div>
                 <div class="pr-4"><strong>62 </strong>following</div>
             </div>
@@ -27,21 +27,11 @@
         </div>
     </div>
     <div class="row pt-5">
-        <div class="col-4">
-            <img src="https://images.pexels.com/photos/668353/pexels-photo-668353.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-                    alt="profile pic"
-                    class="w-100 h-100">
-        </div>
-        <div class="col-4">
-            <img src="https://images.pexels.com/photos/1028705/pexels-photo-1028705.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-                    alt="profile pic"
-                    class="w-100 h-100">
-        </div>
-        <div class="col-4">
-            <img src="https://images.pexels.com/photos/161599/scent-sticks-fragrance-aromatic-161599.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" 
-                    alt="profile pic"
-                    class="w-100 h-100">
-        </div>
+        @foreach ( $user->posts as $post)
+            <div class="col-4 pb-3">
+                <img src="http://127.0.0.1:8000/storage/{{ $post->image }}" alt="profile pic" class="w-100 h-100">
+            </div>
+        @endforeach
     </div>
 </div>
 @endsection
