@@ -29,7 +29,9 @@
     <div class="row pt-5">
         @foreach ( $user->posts as $post)
             <div class="col-4 pb-3">
-                <img src="http://127.0.0.1:8000/storage/{{ $post->image }}" alt="profile pic" class="w-100 h-100">
+                <a href="{{ route('post.show', $post->id) }}" >
+                    <img src="http://127.0.0.1:8000/storage/{{ $post->image }}" alt="{{ $post->caption }}" class="w-100 h-100">
+                </a>
             </div>
         @endforeach
     </div>
