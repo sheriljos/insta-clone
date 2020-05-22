@@ -4,15 +4,22 @@
 <div class="container">
     <div class="row">
         <div class="col-3 d-flex justify-content-center">
-            <img src="https://scontent-amt2-1.cdninstagram.com/v/t51.2885-19/s320x320/67635540_771784243296529_6906501480065269760_n.jpg?_nc_ht=scontent-amt2-1.cdninstagram.com&_nc_ohc=edyKn43hi_kAX-J_F70&oh=3c235456c016a817c246fe5e75213c31&oe=5EE8707C" 
+        <img src="/storage/{{ $user->profile->image }}" 
                 alt="profile pic"
-                width=160
+                width=200
                 class="rounded-circle">
         </div>
         <div class="col-9">
             <div class="d-flex justify-content-between align-items-baseline">
                 <h3>{{ $user->username }}</h3>
-            <a href="{{ route('post.create')}}">Add posts</a>
+            <a href="{{ route('post.create')}}">
+                <strong>Add posts</strong>
+            </a>
+            </div>
+            <div>
+                <a href="{{ route('profile.edit', $user->id)}}">
+                    <strong>Edit Profile</strong>
+                </a>
             </div>
             <div class="d-flex pt-2 pb-3">
                 <div class="pr-4"><strong>{{ $user->posts->count() }} </strong>posts</div>
@@ -20,7 +27,7 @@
                 <div class="pr-4"><strong>62 </strong>following</div>
             </div>
             <div><strong>{{ $user->profile->title }}</strong></div>
-        <div>{{ $user->profile->description }}</div>
+            <div>{{ $user->profile->description }}</div>
             <div>
             <a href="#" class="nounderline dark-color"><strong>{{ $user->profile->url }}</strong></a>
             </div>
@@ -30,7 +37,7 @@
         @foreach ( $user->posts as $post)
             <div class="col-4 pb-3">
                 <a href="{{ route('post.show', $post->id) }}" >
-                    <img src="http://127.0.0.1:8000/storage/{{ $post->image }}" alt="{{ $post->caption }}" class="w-100 h-100">
+                    <img src="/storage/{{ $post->image }}" alt="{{ $post->caption }}" class="w-100 h-100">
                 </a>
             </div>
         @endforeach
