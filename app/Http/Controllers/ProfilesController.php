@@ -6,25 +6,19 @@ use App\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProfileRequest;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Response;
 
 class ProfilesController extends Controller
 {
-
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-    
     /**
      * Show the application dashboard.
-     * @param string $user
+     * @param string $userName
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index(string $user)
+    public function index(string $userName)
     {
-        if (!$user = User::where('username', $user)->first()) {
-            //TODO: return a default template
-            dd('no user dude');
+        if (!$user = User::where('username', $userName)->first()) {
+            return Response::make(view('errors.notFound', ['userName' => $userName]), 404);
         }
 
         return view('profiles.index', 
@@ -32,19 +26,32 @@ class ProfilesController extends Controller
         );
     }
 
+    /**
+     * Render view for editing profile
+     * 
+     * @param int $id
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
     public function edit(int $id)
     {
         $user = User::findOrFail($id);
+        $this->authorize('update', $user->profile);
 
         return view('profiles.edit', ['user' => $user]);
     }
 
+    /**
+     * Update the profile
+     * 
+     * @param ProfileRequest $request
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
     public function update(ProfileRequest $request)
     {
         $profileArray = $request->toArray();
 
-        if ($request->image) {
-            $imagePath = $request->image->store('uploads', 'public');
+        if ($requestImage = $request->image) {
+            $imagePath = $requestImage->store('uploads', 'public');
             $image = Image::make(public_path("storage/{$imagePath}"))->fit(300, 300);
             $image->save();
     

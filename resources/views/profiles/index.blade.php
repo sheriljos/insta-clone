@@ -4,35 +4,41 @@
 <div class="container">
     <div class="row">
         <div class="col-3 d-flex justify-content-center">
-        <img src="/storage/{{ $user->profile->image }}" 
-                alt="profile pic"
-                width=200
-                class="rounded-circle">
+            <img src="/storage/{{ $user->profile->image }}" 
+                    alt="profile pic"
+                    width=200
+                    class="rounded-circle">
         </div>
+
         <div class="col-9">
             <div class="d-flex justify-content-between align-items-baseline">
                 <h3>{{ $user->username }}</h3>
-            <a href="{{ route('post.create')}}">
-                <strong>Add posts</strong>
-            </a>
+                @can('update', $user->profile)                    
+                    <a href="{{ route('post.create')}}">
+                        <strong>Add posts</strong>
+                    </a>
+                @endcan
             </div>
-            <div>
+            @can('update', $user->profile)               
                 <a href="{{ route('profile.edit', $user->id)}}">
                     <strong>Edit Profile</strong>
                 </a>
-            </div>
+            @endcan
             <div class="d-flex pt-2 pb-3">
                 <div class="pr-4"><strong>{{ $user->posts->count() }} </strong>posts</div>
                 <div class="pr-4"><strong>1040 </strong>followers</div>
                 <div class="pr-4"><strong>62 </strong>following</div>
             </div>
-            <div><strong>{{ $user->profile->title }}</strong></div>
+            <div>
+                <strong>{{ $user->profile->title }}</strong>
+            </div>
             <div>{{ $user->profile->description }}</div>
             <div>
-            <a href="#" class="nounderline dark-color"><strong>{{ $user->profile->url }}</strong></a>
+                <a href="#" class="nounderline dark-color"><strong>{{ $user->profile->url }}</strong></a>
             </div>
         </div>
     </div>
+
     <div class="row pt-5">
         @foreach ( $user->posts as $post)
             <div class="col-4 pb-3">
