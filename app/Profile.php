@@ -12,7 +12,7 @@ class Profile extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'description', 'url', 'image'
+        'title', 'description', 'url', 'image', 'user_id'
     ];
 
     public function user()
