@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
         <div class="col-3 d-flex justify-content-center">
-            <img src="/storage/{{ $user->profile->image }}" 
+            <img src="{{ $user->profile->getImage() }}" 
                     alt="profile pic"
                     width=200
                     class="rounded-circle">
