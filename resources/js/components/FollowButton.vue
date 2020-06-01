@@ -18,6 +18,9 @@
                     .then(response => {
                         console.warn(response.data);
                     })
+                    .catch( err => {
+                        window.location = 'profile';
+                    })
             }
         }
     }

@@ -10,9 +10,9 @@ class FollowsController extends Controller
     public function store(Request $request)
     {
         if (!$userId = $request->userId) {
-            //TODO: Not allowed
-            dd("404");
+            return Response::make(view('errors.notFound'), 404);
         }
+
         $user = User::findOrfail($userId);
         return auth()->user()->following()->toggle($user->profile);
     }

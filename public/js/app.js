@@ -1923,6 +1923,8 @@ __webpack_require__.r(__webpack_exports__);
     followUser: function followUser() {
       axios.post('/follow/' + this.userId).then(function (response) {
         console.warn(response.data);
+      })["catch"](function (err) {
+        window.location = 'profile';
       });
     }
   }

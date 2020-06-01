@@ -18,7 +18,7 @@ class ProfilesController extends Controller
     public function index(string $userName)
     {
         if (!$user = User::where('username', $userName)->first()) {
-            return Response::make(view('errors.notFound', ['userName' => $userName]), 404);
+            return Response::make(view('errors.notFound'), 404);
         }
 
         return view('profiles.index', 
