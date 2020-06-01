@@ -30,4 +30,9 @@ class Profile extends Model
     {
         $this->belongsTo(User::class);
     }
+
+    public function followers()
+    {
+        return $this->belongsToMany(User::class);
+    }
 }
