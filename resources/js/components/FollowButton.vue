@@ -25,7 +25,11 @@
                         this.status = !this.status
                     })
                     .catch( err => {
-                        window.location = 'profile';
+                        if (err.response.status === 401) {
+                            window.location = '/login';
+                        } else {
+                            window.location = 'profile';
+                        }
                     })
             },
         },
