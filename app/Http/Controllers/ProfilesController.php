@@ -21,8 +21,13 @@ class ProfilesController extends Controller
             return Response::make(view('errors.notFound'), 404);
         }
 
+        $follows = auth()->user() ? auth()->user()->following->contains($user->id) : false;
+
         return view('profiles.index', 
-            ['user' => $user]
+            [
+                'user' => $user, 
+                'follows' => $follows
+            ]
         );
     }
 
