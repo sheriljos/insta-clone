@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProfileRequest;
+use Illuminate\Support\Facades\Cache;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Response;
 
@@ -22,12 +23,27 @@ class ProfilesController extends Controller
         }
 
         $follows = auth()->user() ? auth()->user()->following->contains($user->id) : false;
+        
+        $postsCount = Cache::remember('posts.count'. $user->id, 
+            now()->addSeconds(30),
+            function () use ($user) {
+                return $user->posts->count();
+            });
+
+        $followersCount = Cache::remember('followers.count'. $user->id, 
+            now()->addSeconds(30),
+            function () use ($user) {
+                return $user->profile->followers->count();
+            });
+
+        $followingCount = Cache::remember('following.count'. $user->id, 
+            now()->addSeconds(30),
+            function () use ($user) {
+                return $user->following->count();
+            });
 
         return view('profiles.index', 
-            [
-                'user' => $user, 
-                'follows' => $follows
-            ]
+            compact('user', 'follows', 'postsCount', 'followersCount', 'followingCount')
         );
     }
 
