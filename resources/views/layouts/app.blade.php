@@ -23,7 +23,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand d-flex" href="{{ url('/') }}">
+                <a class="navbar-brand d-flex" href="{{ url('/post') }}">
                     <div class="pr-3 border-right border-dark">
                         <img src="/images/icon.svg" alt="icon" width=30>
                     </div>
@@ -54,6 +54,9 @@
                                 </li>
                             @endif
                         @else
+                            <a href="/profile/{{ Auth::user()->username }}">
+                                <img src="/storage/{{ Auth::user()->profile->image }}" alt="profile pic" class="rounded-circle" width="40">
+                            </a>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle text-dark" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->username }} <span class="caret"></span>
